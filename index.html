@@ -1,16 +1,25 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-Hant">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>L3</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="一座會回應游標靠近、由多種生成花型組成的 p5.js 互動花園。"
+    />
+    <title>Interactive Flowers｜互動花園</title>
     <link rel="stylesheet" href="css/style.css" />
-    <script src="js/p5.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/p5@2.2.3/lib/p5.min.js"></script>
+    <script defer src="js/palettes.js"></script>
+    <script defer src="js/flower.js"></script>
+    <script defer src="js/soil.js"></script>
+    <script defer src="sketch.js"></script>
   </head>
   <body>
-    <script src="js/palettes.js"></script>
-    <script src="js/flower.js"></script>
-    <script src="js/soil.js"></script>
-    <script src="sketch.js"></script>
+    <main class="app">
+      <div id="sketch-container" aria-label="可與游標互動的生成花園"></div>
+      <p class="hint">移動游標靠近花朵 · 點擊重新生長</p>
+    </main>
+    <noscript>這件作品需要啟用 JavaScript 才能顯示。</noscript>
   </body>
 </html>
