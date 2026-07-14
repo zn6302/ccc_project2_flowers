@@ -1,34 +1,51 @@
-let flowers = [];
+const CANVAS_SIZE = 600;
+const FLOWER_COUNT = 50;
+const flowers = [];
 
 function setup() {
-	createCanvas(600, 600);
-
-	let flowerCount = 50;
-	let maxX = width * 0.3;
-	let maxY = height * 0.1;
-	let goldenAngle = PI * (3 - sqrt(5));
-
-	for (let i = 0; i < flowerCount; i++) {
-		let spread = sqrt((i + 0.5) / flowerCount);
-		let ang = i * goldenAngle;
-		let jitter = 1 + random(-0.08, 0.08);
-		let x = maxX * spread * cos(ang) * jitter;
-		let y = maxY * spread * sin(ang) * jitter;
-
-		let t = spread; // 離中心的比例：0=中心，1=邊緣
-		let stemH = lerp(70 + random(30), 20 + random(20), t); // 中心高120，邊緣矮50
-		let sz = lerp(8 + random(4), 4 + random(2), t);
-
-		flowers.push(new Flower(width / 2 + x, height * 0.6 + y, sz, stemH));
-	}
+  const canvas = createCanvas(CANVAS_SIZE, CANVAS_SIZE);
+  canvas.parent("sketch-container");
+  pixelDensity(min(window.devicePixelRatio || 1, 2));
+  growFlowerField();
 }
 
 function draw() {
-	background(245, 240, 230);
-	drawSoil(width / 2, height * 0.6, width * 0.35, height * 0.15)
+  background(245, 240, 230);
+  drawSoil(width / 2, height * 0.6, width * 0.35, height * 0.15);
 
-	for (let f of flowers) {
-		f.update(mouseX, mouseY);
-		f.display();
-	}
+  for (const flower of flowers) {
+    flower.update(mouseX, mouseY);
+    flower.display();
+  }
+}
+
+function growFlowerField() {
+  flowers.length = 0;
+
+  const maxX = width * 0.3;
+  const maxY = height * 0.1;
+  const goldenAngle = PI * (3 - sqrt(5));
+
+  for (let i = 0; i < FLOWER_COUNT; i += 1) {
+    const spread = sqrt((i + 0.5) / FLOWER_COUNT);
+    const angle = i * goldenAngle;
+    const jitter = 1 + random(-0.08, 0.08);
+    const x = maxX * spread * cos(angle) * jitter;
+    const y = maxY * spread * sin(angle) * jitter;
+    const stemHeight = lerp(70 + random(30), 20 + random(20), spread);
+    const size = lerp(8 + random(4), 4 + random(2), spread);
+
+    flowers.push(
+      new Flower(width / 2 + x, height * 0.6 + y, size, stemHeight),
+    );
+  }
+}
+
+function mousePressed() {
+  const pointerIsInsideCanvas =
+    mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height;
+
+  if (pointerIsInsideCanvas) {
+    growFlowerField();
+  }
 }
