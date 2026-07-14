@@ -23,6 +23,10 @@ body {
     #f5f0e8;
 }
 
+button {
+  font: inherit;
+}
+
 .app {
   display: grid;
   min-height: 100svh;
@@ -43,20 +47,75 @@ canvas {
   display: block;
   width: min(88vw, 600px) !important;
   height: auto !important;
-  cursor: crosshair;
-  touch-action: none;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+canvas:focus-visible {
+  outline: 3px solid rgb(74 108 140 / 45%);
+  outline-offset: 4px;
+}
+
+.interaction-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .hint {
   margin: 0;
   color: rgb(74 76 73 / 68%);
   font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+.regrow-button {
+  flex: 0 0 auto;
+  border: 1px solid rgb(74 108 140 / 24%);
+  border-radius: 999px;
+  padding: 0.55rem 0.9rem;
+  background: rgb(255 255 255 / 62%);
+  color: #4a6c8c;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.regrow-button:hover {
+  transform: translateY(-1px);
+  background: rgb(255 255 255 / 88%);
+  box-shadow: 0 0.4rem 1rem rgb(91 78 62 / 10%);
+}
+
+.regrow-button:active {
+  transform: translateY(0);
+}
+
+.regrow-button:focus-visible {
+  outline: 3px solid rgb(74 108 140 / 34%);
+  outline-offset: 3px;
 }
 
 noscript {
   display: block;
   padding: 1rem;
   text-align: center;
+}
+
+@media (max-width: 540px) {
+  .interaction-bar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .hint {
+    text-align: center;
+  }
+
+  .regrow-button {
+    width: 100%;
+  }
 }

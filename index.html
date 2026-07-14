@@ -18,7 +18,14 @@
   <body>
     <main class="app">
       <div id="sketch-container" aria-label="可與游標互動的生成花園"></div>
-      <p class="hint">移動游標靠近花朵 · 點擊重新生長</p>
+      <div class="interaction-bar">
+        <p id="interaction-status" class="hint" aria-live="polite">
+          移動游標靠近花朵，或點擊畫布重新生長
+        </p>
+        <button id="regrow-button" class="regrow-button" type="button">
+          重新生長
+        </button>
+      </div>
     </main>
     <noscript>這件作品需要啟用 JavaScript 才能顯示。</noscript>
   </body>
